@@ -3,6 +3,7 @@ using NLayer.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,5 +19,13 @@ namespace NLayer.Repository
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //çalışmış olduğumuz assembly i tara ve buradaki IEntityTypeConfiguration interface ine sahip tüm classları bul ve uygula(herbir classlibrary birer assemblydir)
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

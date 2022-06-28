@@ -12,6 +12,6 @@ namespace NLayer.Core
 
         public DateTime CreateDate { get; set; }
 
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace NLayer.Repository
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
@@ -23,8 +23,26 @@ namespace NLayer.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            //çalışmış olduğumuz assembly i tara ve buradaki IEntityTypeConfiguration interface ine sahip tüm classları bul ve uygula(herbir classlibrary birer assemblydir)
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//çalışmış olduğumuz assembly i tara ve buradaki IEntityTypeConfiguration interface ine sahip tüm classları bul ve uygula(herbir classlibrary birer assemblydir)
+
+            modelBuilder.Entity<ProductFeature>().HasData(
+                new ProductFeature()
+                {
+                    Id = 1,
+                    Color = "Kırmızı",
+                    Height = 100,
+                    Width = 200,
+                    ProductId = 1
+                },
+                new ProductFeature()
+                {
+                    Id = 2,
+                    Color = "Mavi",
+                    Height = 300,
+                    Width = 500,
+                    ProductId = 2
+                });
+
             base.OnModelCreating(modelBuilder);
         }
     }

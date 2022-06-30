@@ -32,6 +32,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMemoryCache();//cache i aktif ettik.
 
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 

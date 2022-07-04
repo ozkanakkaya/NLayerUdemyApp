@@ -13,10 +13,11 @@ namespace NLayer.Web.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
 
-        public ProductsController(IProductService services, IMapper mapper)
+        public ProductsController(IProductService services, IMapper mapper, ICategoryService categoryService)
         {
             _services = services;
             _mapper = mapper;
+            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -26,9 +27,9 @@ namespace NLayer.Web.Controllers
 
         public async Task<IActionResult> Save()
         {
-            var categories = _categoryService.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
 
-            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
+            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories.ToList());
 
             ViewBag.categories = new SelectList(categoriesDto, "Id", "Name");
 
@@ -44,9 +45,9 @@ namespace NLayer.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var categories = _categoryService.GetAllAsync();
+            var categories = await _categoryService.GetAllAsync();
 
-            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
+            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories.ToList());
 
             ViewBag.categories = new SelectList(categoriesDto, "Id", "Name");
 

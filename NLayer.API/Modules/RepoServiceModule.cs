@@ -35,7 +35,7 @@ namespace NLayer.API.Modules
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
 
 
-            builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();
+            //builder.RegisterType<ProductServiceWithCaching>().As<IProductService>();//cacheden okur
 
         }
     }
